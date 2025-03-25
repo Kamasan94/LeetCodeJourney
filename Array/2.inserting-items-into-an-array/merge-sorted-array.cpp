@@ -45,35 +45,20 @@ using namespace std;
 class Solution {
     public:
         void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
-            int inum1 = 0, inum2 = 0, inum1p2 = m;
-            int nums2left = n;
-            if(n == 0){
-                return;
-            }
-            if(m == 0){
-                for(int i=0; i<n; i++){
-                    nums1[i] = nums2[i];
-                }
-                return;
-            }
-            while(nums2left>0){
-                if(nums1[inum1] <= nums2[inum2] && inum1 != inum1p2){
-                    inum1++;
+            int i = m - 1;
+            int j = n - 1;
+            int k = m + n - 1;
+
+            while(j >= 0){
+                if(i >= 0 && nums1[i] > nums2[j]){
+                    nums1[k] = nums1[i];
+                    i--; 
+                    k--;
                 }
                 else{
-                    nums1[inum1p2] = nums1[inum1]; //should replace 0
-                    nums1[inum1] = nums2[inum2];
-                    inum2++;
-                    nums2left--;
-                    if(inum1 == inum1p2){
-                        inum1++;
-                    }
-                    inum1p2++;    
-                }
-            }
-            while(inum1p2 != inum1){
-                if(nums1[inum1] > nums1[inum1p2]){
-                    
+                    nums1[k] = nums2[j];
+                    j--;
+                    k--;
                 }
             }
         }
