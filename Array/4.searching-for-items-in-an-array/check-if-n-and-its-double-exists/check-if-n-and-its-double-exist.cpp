@@ -24,19 +24,19 @@
 
 #include<iostream>
 #include<vector>
-#include<unordered_map>
+#include<unordered_set>
 using namespace std;
 
 
 class Solution {
 public:
     bool checkIfExist(vector<int>& arr) {
-        std::unordered_map<int, int> u;
-        for(int i = 0; i < arr.size(); i++){
-            if(u[arr[i*2]])
+        std::unordered_set<int> u;
+        for(int num : arr){
+            if(u.count(num * 2) || (num % 2 == 0 && u.count(num/2)))
                 return true;
             else
-                u[i]++;
+                u.insert(num);
         }
         return false;
     }
